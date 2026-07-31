@@ -19,4 +19,18 @@ accent-coloured text on the dark background (contrast).
 
 ## Deploying
 
-Pushes to `main` deploy automatically via Vercel.
+Deploys are manual — push-to-deploy is **not** wired up yet:
+
+```
+vercel deploy --prod
+```
+
+To enable pushes to `main` deploying automatically, add this repo to the Vercel
+GitHub App (`github.com/settings/installations` → Vercel → Configure), then run
+`vercel git connect` once.
+
+## Domain
+
+`voxellabs.ai` is on Cloudflare DNS. Both records must stay **grey-cloud (DNS only)** —
+proxying them terminates TLS twice and breaks the site. Cloudflare shows a permanent
+banner recommending you enable it. Don't.
