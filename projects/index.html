@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projects — Voxel Labs</title>
+<meta name="description" content="Demos, talks, and technical writeups from Voxel Labs. Every project links to the video, the full writeup, and the source.">
+<meta name="theme-color" content="#0d0d0d">
+<link rel="canonical" href="https://voxellabs.ai/projects">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%230d0d0d'/%3E%3Cpath d='M7 8.5l5 7 5-7' stroke='%23828df5' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://voxellabs.ai/projects">
+<meta property="og:title" content="Projects — Voxel Labs">
+<meta property="og:description" content="Demos, talks, and technical writeups. Every project links to the video, the full writeup, and the source.">
+<meta property="og:image" content="https://voxellabs.ai/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300..600&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<!-- ============================== NAV ============================== -->
+<nav class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a href="/" class="brand">
+      <svg class="mk" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="1.5" y="1.5" width="21" height="21" rx="6" stroke="#828df5" stroke-width="1.4"/>
+        <path d="M7 8.5l5 7 5-7" stroke="#828df5" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>Voxel Labs</span>
+    </a>
+    <div class="nav-links">
+      <a href="/#build">What we build</a>
+      <a href="/#how">How we work</a>
+      <a href="/#work">Our work</a>
+      <a href="/#cortana">Cortana</a>
+      <a href="/projects" class="on">Projects</a>
+    </div>
+    <a href="mailto:ashwin@voxellabs.ai" class="btn btn-accent nav-cta">Get in touch</a>
+  </div>
+</nav>
+
+<!-- ============================== HEADER ============================== -->
+<header class="phead">
+  <div class="wrap">
+    <div class="phead-in">
+      <p class="eyebrow rv">Projects</p>
+      <h1 class="rv">Work you can watch.</h1>
+      <p class="lede rv rv-2">
+        Demos, talks, and technical writeups. Client work is under contract and stays off this page —
+        everything here you can watch running, read in full, and clone.
+      </p>
+      <p class="byline rv rv-3">Voxel Labs — <b>Ashwin Kumar, CEO</b></p>
+    </div>
+  </div>
+</header>
+
+<!-- ============================== INDEX ============================== -->
+<section style="padding-top:22px">
+  <div class="wrap">
+    <div class="pj-list" id="pjList"><!-- rows injected --></div>
+  </div>
+</section>
+
+<!-- ============================== CTA ============================== -->
+<section class="cta">
+  <div class="wrap">
+    <h2 class="rv">Let's build your next agent.</h2>
+    <a href="mailto:ashwin@voxellabs.ai" class="btn btn-accent rv rv-2">Get in touch <span class="arrow">&#8599;</span></a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Voxel Labs AI, LLC · 2026</p>
+    <p><a href="mailto:ashwin@voxellabs.ai">ashwin@voxellabs.ai</a></p>
+  </div>
+</footer>
+
+<script src="/site.js"></script>
+<script>
+/* ============================================================
+   DATA — the whole index. Add an entry, it renders.
+
+   year   string shown in the left gutter ("—" if unknown)
+   comp   the competition or venue, uppercased by CSS
+   award  optional chip; omit it unless the placing is verified
+   title  project name
+   deck   one or two lines
+   stk    stack chips
+   vimeo  Vimeo numeric id  -> click-to-play facade
+   poster local poster image -> shown before play
+   post   internal writeup route
+   repo   public source
+   stub   true while the entry is scaffolding, not content
+   ============================================================ */
+const PROJECTS = [
+  {
+    year:"2026", comp:"Talk · for a room of founders",
+    title:"The cost of the agent you can't see",
+    deck:"Working title. The new technical talk — building the instrument that shows what an agent actually spends, then the gate that stops it.",
+    stk:["Claude","Agents","Cost"],
+    vimeo:null, post:null, repo:null, stub:true
+  },
+  {
+    year:"2024", comp:"Databricks Generative AI World Cup",
+    award:"Winner · First place",
+    title:"LogCraft RAG",
+    deck:"Field service engineers write long maintenance logs by hand. LogCraft takes a photo and a scribbled note and returns a finished log — using multi-modal retrieval over every log written before it.",
+    stk:["Multi-modal RAG","Databricks","DBRX","CLIP"],
+    vimeo:null,
+    post:"/projects/logcraft-rag",
+    repo:"https://github.com/ashnkumar/log-craft-dbrx"
+  },
+  {
+    year:null,   comp:"Elastic · Claude Agent SDK",
+    title:"CodeFleet",
+    deck:"Placeholder. Orchestrating a fleet of coding agents against a shared search index.",
+    stk:["Claude Agent SDK","Elastic"],
+    vimeo:null, post:null,
+    repo:"https://github.com/ashnkumar/codefleet", stub:true
+  },
+  {
+    year:null,   comp:"Competition to be confirmed",
+    title:"Synapse AI",
+    deck:"Placeholder. Autonomous agents on Claude 3.5 with computer use and retrieval — currently a private repo, pending republish.",
+    stk:["Claude 3.5","Computer use","RAG"],
+    vimeo:null, post:null, repo:null, stub:true
+  },
+  {
+    year:null,   comp:"Competition to be confirmed",
+    title:"Theta Agents",
+    deck:"Placeholder.",
+    stk:["Agents"],
+    vimeo:null, post:null,
+    repo:"https://github.com/ashnkumar/theta-agents", stub:true
+  },
+  {
+    year:null,   comp:"TigerGraph · Graph for All",
+    title:"MentalHealthHero",
+    deck:"Placeholder.",
+    stk:["Graph"],
+    vimeo:null, post:null,
+    repo:"https://github.com/ashnkumar/MentalHealthHero", stub:true
+  }
+];
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+const PLAY = '<svg viewBox="0 0 12 14" aria-hidden="true"><path d="M0 0l12 7-12 7z"/></svg>';
+
+function media(p){
+  if (p.vimeo){
+    const poster = p.poster
+      ? '<img src="'+p.poster+'" alt="" loading="lazy" decoding="async">'
+      : '';
+    return '<button class="pj-media" data-vimeo="'+p.vimeo+'" data-title="'+p.title+'" '+
+           'aria-label="Play the '+p.title+' video">'+poster+
+           '<span class="pj-scrim"><span class="pj-play">'+PLAY+'</span></span></button>';
+  }
+  return '<div class="pj-media pending"><span>Video pending</span></div>';
+}
+
+function links(p){
+  const out = [];
+  out.push(p.post
+    ? '<a href="'+p.post+'">Read the writeup <span class="arrow">&#8594;</span></a>'
+    : '<a aria-disabled="true">Writeup pending</a>');
+  if (p.repo) out.push('<a href="'+p.repo+'" target="_blank" rel="noopener">Source <span class="arrow">&#8599;</span></a>');
+  return '<div class="pj-links">'+out.join('')+'</div>';
+}
+
+document.getElementById('pjList').innerHTML = PROJECTS.map((p,i) => (
+  '<article class="pj rv'+(p.stub ? ' stub' : '')+(i ? ' rv-2' : '')+'">'+
+    '<div class="pj-year">'+(p.year || '&mdash;')+'</div>'+
+    '<div>'+media(p)+'</div>'+
+    '<div class="pj-meta">'+
+      '<p class="pj-comp">'+p.comp+
+        (p.award ? '<span class="award">'+p.award+'</span>' : '')+
+        (p.stub  ? '<span class="award" style="color:var(--t4);border-color:var(--line-strong)">Placeholder</span>' : '')+
+      '</p>'+
+      '<h2 class="pj-title">'+p.title+'</h2>'+
+      '<p class="pj-deck">'+p.deck+'</p>'+
+      '<div class="pj-stk">'+p.stk.map(s => '<span class="chip">'+s+'</span>').join('')+'</div>'+
+      links(p)+
+    '</div>'+
+  '</article>'
+)).join('');
+
+/* rows are injected after site.js ran its pass, so observe them now */
+document.querySelectorAll('.pj.rv').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

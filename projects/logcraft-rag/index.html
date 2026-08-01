@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LogCraft RAG — Voxel Labs</title>
+<meta name="description" content="Field service engineers write long maintenance logs by hand. LogCraft takes a photo and a scribbled note and returns a finished log — using multi-modal retrieval over every log written before it.">
+<meta name="theme-color" content="#0d0d0d">
+<link rel="canonical" href="https://voxellabs.ai/projects/logcraft-rag">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%230d0d0d'/%3E%3Cpath d='M7 8.5l5 7 5-7' stroke='%23828df5' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://voxellabs.ai/projects/logcraft-rag">
+<meta property="og:title" content="LogCraft RAG — Voxel Labs">
+<meta property="og:description" content="Field service engineers write long maintenance logs by hand. LogCraft takes a photo and a scribbled note and returns a finished log — using multi-modal retrieval over every log written before it.">
+<meta property="og:image" content="https://voxellabs.ai/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300..600&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a href="/" class="brand">
+      <svg class="mk" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="1.5" y="1.5" width="21" height="21" rx="6" stroke="#828df5" stroke-width="1.4"/>
+        <path d="M7 8.5l5 7 5-7" stroke="#828df5" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>Voxel Labs</span>
+    </a>
+    <div class="nav-links">
+      <a href="/#build">What we build</a>
+      <a href="/#how">How we work</a>
+      <a href="/#work">Our work</a>
+      <a href="/#cortana">Cortana</a>
+      <a href="/projects" class="on">Projects</a>
+    </div>
+    <a href="mailto:ashwin@voxellabs.ai" class="btn btn-accent nav-cta">Get in touch</a>
+  </div>
+</nav>
+
+<header class="phead">
+  <div class="wrap">
+    <div class="art-hero">
+      <p class="pj-comp rv"><span>2024</span><span class="sep">·</span><span>Databricks Generative AI World Cup</span><span class="award">Winner · First place</span></p>
+      <h1 class="rv">LogCraft RAG</h1>
+      <p class="lede rv rv-2">Field service engineers write long maintenance logs by hand. LogCraft takes a photo and a scribbled note and returns a finished log — using multi-modal retrieval over every log written before it.</p>
+      <div class="pj-stk rv rv-2"><span class="chip">Multi-modal RAG</span><span class="chip">Databricks</span><span class="chip">DBRX</span><span class="chip">CLIP</span></div>
+      <div class="art-bar rv rv-3"><a href="/projects" class="back"><span class="arrow">&#8592;</span> All projects</a><a href="https://github.com/ashnkumar/log-craft-dbrx" target="_blank" rel="noopener" class="back">Source <span class="arrow">&#8599;</span></a></div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <article class="art-body">
+<aside class="callout"><em><strong>👉🏼 Note:</strong> The LogCraft project is built within a Databricks workspace and requires access to APIs specific to that workspace; please see workspace ID and notebook link in submission materials to access the project.</em></aside>
+<h2>Overview</h2>
+<p>LogCraft is a multi-modal Retrieval Augmented Generation app built on the Databricks platform to help field service engineers from manufacturing companies write detailed maintenance logs quickly and efficiently.</p>
+<figure><a href="img/v3WWs3R.webp" target="_blank" rel="noopener" aria-label="Open the full-size diagram"><img loading="lazy" decoding="async" alt="Preview" src="img/v3WWs3R.webp" /></a></figure>
+<h2>Why we built LogCraft</h2>
+<p><strong>Problem:</strong> One of the most tedious parts of the manufacturing industry is for field service engineers to physically inspect equipment on a periodic basis for repairs and defects. For each inspection they’re required to write long, detailed maintenance logs that include photos of the equipment, an evaluation of its current state, and recommendations. This process is <strong>(1)</strong> time consuming, <strong>(2)</strong> inefficient as it doesn&rsquo;t use prior logs&rsquo; data, and <strong>(3)</strong> non-standardized since each engineer writes logs in a different format.</p>
+<p><strong>Solution:</strong> LogCraft helps solve these problems with AI, built on Databricks. A field service engineer simply has to upload a photo of the equipment and provide quick, rough notes. LogCraft uses multi-modal RAG (images + text retrieval) to find prior logs that are most similar to the image + notes combination from the engineer. Then all of this information plus context is given to GPT4-Vision to generate a final, detailed log that the engineer can download as a PDF.</p>
+<h2>How it works (technical overview)</h2>
+<p>We used a combination of Databricks, HuggingFace, and OpenAI to build LogCraft. We used multiple features of Databricks: Delta Tables, Notebooks, and Vector Search Indices. We also used the Foundational Model API and Model Serving endpoints features of Databricks.</p>
+<h4>Step 1: Creating the Dataset</h4>
+<p>First, we needed a seed dataset of maintenance logs and images. We found a few examples of these logs online but we needed a lot more so we used the GPT4-Vision model from OpenAI to generate a synthetic dataset.</p>
+<figure><a href="img/OvIiEGZ.webp" target="_blank" rel="noopener" aria-label="Open the full-size diagram"><img loading="lazy" decoding="async" alt="Preview" src="img/OvIiEGZ.webp" /></a></figure>
+<p>We fed it input images of equipment and gave it a few real maintenance logs for few-shot examples, and then asked it to generate a hundred full logs based on that information. These logs and images were imported into our Databricks workspace.</p>
+<h4>Step 2: Indexing (embedding and storage of vectors)</h4>
+<p>Now that we had our dataset, we moved onto indexing and storing embeddings in our vector database. The flow below is what we did for a single example, which we repeated for the entire dataset.</p>
+<figure><a href="img/FJ9S7oq.webp" target="_blank" rel="noopener" aria-label="Open the full-size diagram"><img loading="lazy" decoding="async" alt="Preview" src="img/FJ9S7oq.webp" /></a></figure>
+<p><strong><em>Steps for the indexing phase:</em></strong></p>
+<ol>
+<li><strong>Use DBRX Instruct to create log summaries:</strong> First, we took the text of the log and used the DBRX Instruct model with the Foundational Model API to summarize this text into a short paragraph for use downstream.</li>
+<li><strong>Use CLIP model to create multimodal embeddings:</strong> Then, we ran both this summary and the image from the log through the <strong><a href="https://huggingface.co/openai/clip-vit-large-patch14">CLIP model from HuggingFace</a></strong>. CLIP is a multi-modal model that associates images with their text description and is commonly used for combined image+text retrieval. We extract the last hidden layer of the model, which represents an embedding of size 768 that captures the semantic meaning of both the image and text combined. The model can only take text up to 77 tokens of text, which is why we needed to use the DBRX model to summarize the log first.</li>
+<li><strong>Store embedding in Delta Table</strong>: Finally we stored this embedding along with the full maintenance log in a Delta Table within Databricks. We built a vector search endpoint and vector index on top of this table that will always keep it in sync with new data.</li>
+</ol>
+<h4>Step 3: Inference phase (multi-modal RAG)</h4>
+<p>Now let’s walk through what happens during inference when a user actually uses our deployed app.</p>
+<figure><a href="img/DLSO9My.webp" target="_blank" rel="noopener" aria-label="Open the full-size diagram"><img loading="lazy" decoding="async" alt="Preview" src="img/DLSO9My.webp" /></a></figure>
+<p><strong><em>Steps for the inference phase:</em></strong></p>
+<ol>
+<li><strong>User uploads an image and their notes:</strong> First, the user uploads a photo of the equipment and some short notes through our web app interface.</li>
+<li><strong>Use CLIP model to create embeddings:</strong> Then, we use the same CLIP model as before to create an embedding representing the combination of that image and the notes.</li>
+<li><strong>Retrieve similar maintenance logs</strong>: We run a vector similarity search on that embedding with our vector search in Databricks to retrieve the full maintenance logs’ text of prior logs that are most similar to the information from the user.</li>
+<li><strong>Create prompt for GPT4-Vision</strong>: Then we create a detailed prompt that we send to OpenAI’s GPT4-Vision model using Databricks’ model endpoints. This prompt includes the original image and notes from the user, the full text of retrieved prior logs from the vector search (as context), and detailed instructions on how to create a new maintenance log using all of that information.</li>
+<li><strong>Generate maintenance log and display to user</strong>: We send this to OpenAI&rsquo;s GPT4-Vision through Databrick&rsquo;s model endpoint, which generates a new, full, high-quality maintenance log.</li>
+<li><strong>Create PDF of maintenance log for user</strong>: Finally, We use a Python library to create a PDF that includes the image and generated log.</li>
+</ol>
+<p>The best part is that this entire pipeline from indexing to inference is hyper-scalable using Databricks so our app will get better over time without any new code needing to be written.</p>
+<h2>What&rsquo;s next for LogCraft?</h2>
+<p>Through building LogCraft for the Databricks hackathon, we realized that there are multiple high-impact downstream use cases for LogCraft:</p>
+<ul>
+<li><strong>Continuous monitoring with IoT</strong>: We can integrate this with IoT devices within the manufacturing plants themselves. These devices can provide a photo and generated text from computer vision to LogCraft to auto-generate logs daily.</li>
+<li><strong>Predictive maintenance algorithms</strong>: LogCraft can also be used to augment predictive maintenance algorithms so manufacturing companies can address any potential issues BEFORE they happen.</li>
+<li><strong>Autonomous field service robots</strong>: In the long term, apps like LogCraft can help develop fully autonomous field service robots to perform their own inspections and maintenance out on the field. So in addition to generating logs, these robots can actually address the issues in real-time.</li>
+</ul>
+<p>We had a blast building LogCraft on Databricks and see multiple potential future uses of the technology as it scales.</p>
+  </article>
+
+  <div class="art-foot">
+    <a href="/projects" class="back"><span class="arrow">&#8592;</span> All projects</a>
+    <p class="byline">Voxel Labs — <b>Ashwin Kumar, CEO</b></p>
+  </div>
+</div>
+
+<section class="cta">
+  <div class="wrap">
+    <h2 class="rv">Let's build your next agent.</h2>
+    <a href="mailto:ashwin@voxellabs.ai" class="btn btn-accent rv rv-2">Get in touch <span class="arrow">&#8599;</span></a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Voxel Labs AI, LLC · 2026</p>
+    <p><a href="mailto:ashwin@voxellabs.ai">ashwin@voxellabs.ai</a></p>
+  </div>
+</footer>
+
+<script src="/site.js"></script>
+</body>
+</html>
