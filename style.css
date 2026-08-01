@@ -432,6 +432,8 @@ footer a:hover{color:var(--accent-hi)}
 .art-body ul,.art-body ol{color:var(--t-read);margin:0 0 1.5em;padding-left:1.45em}
 .art-body li{margin-bottom:.62em;line-height:1.72}
 .art-body li::marker{color:var(--t4)}
+/* ordered steps carry meaning, so the number has to be readable */
+.art-body ol>li::marker{color:var(--t3);font-family:var(--mono);font-size:.875em}
 .art-body li>strong:first-child{color:var(--t1)}
 .art-body code{
   font-family:var(--mono);font-size:.875em;color:var(--accent-hi);
