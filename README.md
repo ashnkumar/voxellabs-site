@@ -22,7 +22,10 @@ Add an entry, it renders. Entries appear in array order. Fields are documented i
 place; the ones that matter:
 
 - `vimeo` — a numeric Vimeo id turns the tile into a click-to-play facade. Leave it
-  null and the tile renders as "video pending" instead.
+  null and the tile renders as "video pending" instead. Grab the poster frame with
+  `python3 poster.py <vimeo-id> <name>`, which writes `assets/posters/<name>.webp`
+  and prints the two fields to paste in. Same rule as the writeup images: we serve
+  the poster ourselves rather than hot-linking Vimeo's CDN.
 - `stub: true` — marks a row as scaffolding rather than content (dimmed, italic
   title, `PLACEHOLDER` chip). Drop it once the entry is real.
 - `year` / `award` — leave out anything unverified. `—` is better than a wrong year.

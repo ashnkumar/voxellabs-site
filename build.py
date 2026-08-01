@@ -163,6 +163,19 @@ def page(meta, body):
     chips = "".join(f'<span class="chip">{html.escape(s.strip())}</span>'
                     for s in meta.get("stack", "").split(",") if s.strip())
 
+    # the writeup gets shared directly, so it carries the video itself rather than
+    # assuming everyone arrived via the index. Facade, not an embed — see site.js.
+    hero_video = ""
+    if meta.get("vimeo"):
+        poster = (f'<img src="{e("poster")}" alt="" fetchpriority="high" decoding="async">'
+                  if meta.get("poster") else "")
+        hero_video = (
+            f'<button class="pj-media art-video" data-vimeo="{e("vimeo")}" '
+            f'data-title="{title}" aria-label="Play the {title} demo">{poster}'
+            f'<span class="pj-scrim"><span class="pj-play">'
+            f'<svg viewBox="0 0 12 14" aria-hidden="true"><path d="M0 0l12 7-12 7z"/></svg>'
+            f'</span></span></button>')
+
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -222,6 +235,7 @@ def page(meta, body):
 
 <div class="wrap">
   <article class="art-body">
+{hero_video}
 {body}
   </article>
 

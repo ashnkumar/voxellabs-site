@@ -6,7 +6,8 @@ year: 2024
 comp: Databricks Generative AI World Cup
 award: Winner · First place
 repo: https://github.com/ashnkumar/log-craft-dbrx
-vimeo:
+vimeo: 22439234
+poster: /assets/posters/logcraft-rag.webp
 stack: Multi-modal RAG, Databricks, DBRX, CLIP
 ---
 

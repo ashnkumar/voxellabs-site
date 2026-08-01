@@ -488,3 +488,6 @@ footer a:hover{color:var(--accent-hi)}
 @media(prefers-reduced-motion:reduce){
   .pj-media:hover .pj-play,.art-body figure a:hover{transform:none}
 }
+
+/* the writeup's own copy of the demo — same facade, sized like a figure */
+.art-video{grid-column:1/-1;justify-self:center;width:min(58rem,100%);margin:0 0 52px}

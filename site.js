@@ -19,18 +19,21 @@ document.querySelectorAll('.rv').forEach(el => io.observe(el));
 
 /* Video facades — a poster that swaps itself for the real player on click.
    Six embedded iframes would cost more to load than the rest of the site put
-   together, so nothing from Vimeo is fetched until someone actually presses play. */
-document.querySelectorAll('[data-vimeo]').forEach(el => {
-  el.addEventListener('click', (ev) => {
-    ev.preventDefault();
-    if (el.classList.contains('playing')) return;
-    const f = document.createElement('iframe');
-    f.src = 'https://player.vimeo.com/video/' + el.dataset.vimeo +
-            '?autoplay=1&title=0&byline=0&portrait=0';
-    f.allow = 'autoplay; fullscreen; picture-in-picture';
-    f.setAttribute('allowfullscreen', '');
-    f.title = el.dataset.title || 'Video';
-    el.replaceChildren(f);
-    el.classList.add('playing');
-  });
+   together, so nothing from Vimeo is fetched until someone actually presses play.
+
+   Delegated from the document rather than bound per element: the projects index
+   injects its rows from a script that runs after this file, so anything bound at
+   load time would miss every tile on the page it matters most on. */
+document.addEventListener('click', (ev) => {
+  const el = ev.target.closest('[data-vimeo]');
+  if (!el || el.classList.contains('playing')) return;
+  ev.preventDefault();
+  const f = document.createElement('iframe');
+  f.src = 'https://player.vimeo.com/video/' + el.dataset.vimeo +
+          '?autoplay=1&title=0&byline=0&portrait=0';
+  f.allow = 'autoplay; fullscreen; picture-in-picture';
+  f.setAttribute('allowfullscreen', '');
+  f.title = el.dataset.title || 'Video';
+  el.replaceChildren(f);
+  el.classList.add('playing');
 });
